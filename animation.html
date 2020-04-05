@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>애니메이션</title>
+  <style>
+    @keyframes scaleText {
+      0%{
+        font-size: 16px;
+        opacity: 1;
+      }
+      100%{
+        font-size: 48px;
+        opacity: 1;
+      }
+    }
+    .text{
+      opacity: 0;
+      background-color: yellow;
+      /* animation-name: scaleText;
+      animation-duration: 1000ms;
+      animation-fill-mode: forwards;
+      animation-iteration-count: 3;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+      animation-play-state: running;
+      animation-delay: 3s; */
+      animation: scaleText 1000ms forwards 3 alternate ease-in-out running 3s;
+    }
+
+    @keyframes transformNone{
+      100%{
+        opacity: 1;
+        transform: none;
+      }
+    }
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      min-height: 100vh;
+      background-color: #6238ca;
+      color: #fff;
+    }
+    .sequencing{
+      display: flex;
+      flex-flow: column;
+      font-size: 100px;
+      font-weight: 100;
+    }
+    .sequencing.is-animate span{
+      opacity: 0;
+      transform: translateY(4rem);
+      animation: transformNone .6s cubic-bezier(.2,.66,.54,1.4) infinite alternate forwards;
+    }
+    .sequencing span:nth-child(1) { animation-delay: .2s;}
+    .sequencing span:nth-child(2) { animation-delay: .4s;}
+    .sequencing span:nth-child(3) { animation-delay: .6s;}
+  </style>
+</head>
+<body>
+  <div class="sequencing is-animate">
+    <span>Figma를 활용한</span>
+    <span>모바일 웹 UI</span>
+    <span>제작 실습 Animation</span>
+  </div>
+</body>
+</html>

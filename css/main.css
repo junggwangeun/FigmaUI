@@ -5,9 +5,10 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css);
 
 /* 기본스타일 */
-/* *, *::before, *::after{
-  box-sizing: border-box;
-} */
+a{
+  text-decoration: none;
+  color: inherit;
+}
 body { 
   font-family: 'Spoqa Han Sans', 'Sans-serif'; 
   font-weight: 400;
@@ -34,7 +35,59 @@ body {
   clip-path: polygon(0 0, 0 0, 0 0);
 }
 
+/* 공통 애니메이션 */
+@keyframes transformNone {
+  100%{
+    opacity: 1;
+    transform: none;
+  }
+}
+.ediya-menu__item{
+  opacity: 0;
+  animation-name: transformNone;
+  animation-duration: 0.35s;
+  animation-fill-mode: forwards;
+  transform: translateY(4em);
+}
+.ediya-menu__item:nth-child(1){
+  animation-duration: 0.8s;
+}
+.ediya-menu__item:nth-child(2){
+  animation-duration: 1.2s;
+}
+.ediya-menu__item:nth-child(3){
+  animation-duration: 1.6s;
+}
+.ediya-menu__item:nth-child(4){
+  animation-duration: 2s;
+}
+.app-header{
+  animation: transformNone 0.35s 0.4s forwards;
+  transform: translateY(-100%);
+}
+.brand{
+  animation: transformNone 0.3s 0.7s forwards;
+  transform: translateX(-8em);
+}
+.button[aria-label="메뉴 열기"]{
+  animation: transformNone 0.45s 0.4s forwards;
+  transform: translateX(4em);
+}
+
 /* 헤더 */
+.app-header{
+  background-color: rgba(255,255,255,.4);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #aaa;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(20px);
+  z-index: 100;
+}
 /* 브랜드 */
 .brand a{
   display: block;
@@ -63,4 +116,164 @@ body {
   display: block;
   width:26px;
   height: 22px;
+}
+
+/* 메인메뉴 */
+.app-navigation{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: hsla(255, 57%, 10%, 0.9);
+  color: #fff;
+  transition: all 0.4s cubic-bezier(0.66, -0.01, 0.3, 0.99);
+  transform: translateX(105vw);
+  backdrop-filter: blur(2px);
+}
+.app-navigation.is-active {
+  transform: translateX(0);
+}
+.app-navigation .button.is-close-menu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 20px;
+  background: transparent;
+  color: #fff;
+  font-weight: 100;
+  font-size: 25px;
+  line-height: 0.5;
+  border: 0 none
+}
+.app-navigation ul{
+  padding-top: 60px
+}
+.app-navigation li {
+  border-bottom: 1px solid hsla(225, 57%, 30%, 0.5);
+}
+.app-navigation a {
+  display: block;
+  padding: 1em;
+  transition: all 0.4s ease;
+}
+.app-navigation a:hover,
+.app-navigation a:focus{
+  background-color: #2e437c;
+}
+/* 음료 콘텐츠 */
+.app-main{
+  padding-top: 90px;
+  /* margin: 0 20px; */
+}
+.ediya-menu{
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+.ediya-menu__item{
+  background-color: #fff;
+  position: relative;
+}
+.ediya-menu__item figure{
+  padding: 2em;
+  margin: 1em;
+  border: 1px solid #aaa;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+.ediya-menu__item a{
+  display: block;
+}
+.ediya-menu__item img{
+  transition: all .2s;
+  width: 100%;
+  max-width: 330px;
+  height: auto;
+  min-height: 330px;
+  transform: scale(0.85);
+}
+.ediya-menu__item img:hover{
+  transform: scale(1);
+}
+.ediya-menu__item figcaption{
+  margin-bottom: 1em;
+}
+.ediya-menu__item--detail{
+  position: absolute;
+  top: 0;
+  bottom: 0; 
+  left: 0;
+  right: 0;
+  margin: 1em;
+  padding: 2em;
+  background-color: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+}
+.ediya-menu__item--detail.is-active {
+  opacity: 1;
+}
+.ediya-menu__item--name{
+  border-bottom: 2px solid #202023;
+  padding-bottom: 1em;
+  font-weight: 400;
+  font-size: 18px;
+  color: #202022;
+}
+.ediya-menu__item--name [lang="en"]{
+  display: block; 
+  font-size: 14px;
+  color: #737373;
+}
+.ediya-menu__item--detail .button.is-close-panel {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  padding: 9px 15px;
+  font-size: 24px;
+  background: transparent;
+  border: 0 none;
+  transition: all .3s ease;
+}
+.ediya-menu__item--detail .button.is-close-panel:hover{
+  background: #f3f3f3
+}
+.ediya-menu__item--detail p{
+  line-height: 1.6
+}
+.ediya-menu__item--multi-column {
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  padding: 1em 2em;
+  background: #f8f8f8;
+  column-fill: auto;
+  column-gap: 2em;
+  column-rule: 1px solid #999;
+}
+.ediya-menu__item--multi-column.is-2{
+  column-count: 2;
+}
+.ediya-menu__item--detail dl{
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.ediya-menu__item--detail dt{
+  float: left;
+  width: 40%;
+  margin-right:10%
+}
+.ediya-menu__item--detail dd{
+  float: right;
+  width: 50%;
+  margin: 0;
+}
+@media screen and (min-width:769px){
+  .ediya-menu {
+    max-width: 960px;
+    grid-template-columns: 1fr 1fr;
+  }
 }
